@@ -1,0 +1,96 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* co_debt_management
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0+e-20240419\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-09-27 08:08+0000\n"
+"PO-Revision-Date: 2025-09-27 08:08+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: co_debt_management
+#: model:ir.model.fields,field_description:co_debt_management.field_account_bank_statement_line__co_payment_state
+#: model:ir.model.fields,field_description:co_debt_management.field_account_move__co_payment_state
+#: model:ir.model.fields,field_description:co_debt_management.field_account_payment__co_payment_state
+msgid "Co Payment State"
+msgstr "Trạng thái thanh toán"
+
+#. module: co_debt_management
+#: model:ir.model,name:co_debt_management.model_res_partner
+msgid "Contact"
+msgstr "Liên hệ"
+
+#. module: co_debt_management
+#: model_terms:ir.ui.view,arch_db:co_debt_management.view_partner_form_inherit_co_debt
+msgid "Công nợ"
+msgstr ""
+
+#. module: co_debt_management
+#: model:ir.model.fields,field_description:co_debt_management.field_res_partner__co_invoice_count
+#: model:ir.model.fields,field_description:co_debt_management.field_res_users__co_invoice_count
+msgid "Hóa đơn chưa thanh toán"
+msgstr ""
+
+#. module: co_debt_management
+#: model:ir.model.fields,field_description:co_debt_management.field_account_payment__deferred_original_move_ids
+msgid "Hóa đơn gốc"
+msgstr ""
+
+#. module: co_debt_management
+#: model:ir.model.fields.selection,name:co_debt_management.selection__account_move__co_payment_state__in_payment
+msgid "In Payment"
+msgstr "Đang thanh toán"
+
+#. module: co_debt_management
+#: model:ir.model,name:co_debt_management.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: co_debt_management
+#: model:ir.model.fields.selection,name:co_debt_management.selection__account_move__co_payment_state__not_paid
+msgid "Not Paid"
+msgstr "Chưa thanh toán"
+
+#. module: co_debt_management
+#: model:ir.model.fields.selection,name:co_debt_management.selection__account_move__co_payment_state__paid
+msgid "Paid"
+msgstr "Đã thanh toán"
+
+#. module: co_debt_management
+#: model:ir.model.fields.selection,name:co_debt_management.selection__account_move__co_payment_state__partial
+msgid "Partially Paid"
+msgstr "Thanh toán một phần"
+
+#. module: co_debt_management
+#: model_terms:ir.ui.view,arch_db:co_debt_management.view_move_tree_inherit_co_season
+msgid "Payment"
+msgstr "Thanh toán"
+
+#. module: co_debt_management
+#: model:ir.model,name:co_debt_management.model_account_payment
+msgid "Payments"
+msgstr "Thanh toán"
+
+#. module: co_debt_management
+#: model:ir.model,name:co_debt_management.model_account_payment_register
+msgid "Register Payment"
+msgstr "Ghi nhận thanh toán"
+
+#. module: co_debt_management
+#: model:ir.model.fields,field_description:co_debt_management.field_account_bank_statement_line__co_paid_amount
+#: model:ir.model.fields,field_description:co_debt_management.field_account_move__co_paid_amount
+#: model:ir.model.fields,field_description:co_debt_management.field_account_payment__co_paid_amount
+msgid "Đã thanh toán"
+msgstr ""
+
+#. module: co_debt_management
+#: model_terms:ir.ui.view,arch_db:co_debt_management.view_account_payment_form_inherit_debt
+msgid "Thông tin công nợ"
+msgstr ""

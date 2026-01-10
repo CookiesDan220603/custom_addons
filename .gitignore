@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Odoo cache & log
+*.log
+*.pid
+*.sqlite3
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Odoo generated
+*.pot
+*.mo
+
+# Env
+.env

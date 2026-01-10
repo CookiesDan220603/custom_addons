@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Menu Tất cả hoá đơn -->
+    <record id="action_co_invoice_all" model="ir.actions.act_window">
+        <field name="name">Tất cả hoá đơn</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('move_type','=','out_invoice')]</field>
+        <field name="context">
+            {
+                'default_move_type': 'out_invoice',
+                'group_by': ['partner_id'],
+                'expand': True
+            }
+        </field>
+    </record>
+
+
+    <menuitem id="menu_co_invoice_all"
+              name="Tất cả hoá đơn"
+              parent="account.menu_finance"
+              action="action_co_invoice_all"
+              sequence="101"/>
+
+    <!-- Menu Hoá đơn chưa thanh toán -->
+    <record id="action_co_invoice_unpaid" model="ir.actions.act_window">
+        <field name="name">Hoá đơn chưa thanh toán</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('co_payment_state','!=','paid'),('move_type','=','out_invoice')]</field>
+        <field name="context">
+            {
+                'default_move_type': 'out_invoice',
+                'group_by': ['partner_id'],
+                'expand': True
+            }
+        </field>
+    </record>
+
+
+    <menuitem id="menu_co_invoice_unpaid"
+              name="Hoá đơn chưa thanh toán"
+              parent="account.menu_finance"
+              action="action_co_invoice_unpaid"
+              sequence="102"/>
+
+    <!-- Menu Hoá đơn đã thanh toán -->
+    <record id="action_co_invoice_paid" model="ir.actions.act_window">
+        <field name="name">Hoá đơn đã thanh toán</field>
+        <field name="res_model">account.move</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('co_payment_state','=','paid'),('move_type','=','out_invoice')]</field>
+        <field name="context">
+            {
+                'default_move_type': 'out_invoice',
+                'group_by': ['partner_id'],
+                'expand': True
+            }
+        </field>
+    </record>
+
+
+    <menuitem id="menu_co_invoice_paid"
+              name="Hoá đơn đã thanh toán"
+              parent="account.menu_finance"
+              action="action_co_invoice_paid"
+              sequence="103"/>
+</odoo>

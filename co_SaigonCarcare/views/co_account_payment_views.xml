@@ -1,0 +1,42 @@
+<odoo>
+    <!-- Menu cha ngoài cùng -->
+    <menuitem id="menu_payment_root" name="Thanh toán" sequence="50" />
+
+    <!-- Action Phiếu thu -->
+    <record id="action_payment_receipt" model="ir.actions.act_window">
+        <field name="name">Phiếu thu</field>
+        <field name="res_model">account.payment</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[
+            ('payment_type', '=', 'inbound'),
+            ('partner_type', '=', 'customer'),
+            ('is_internal_transfer', '=', False)
+        ]</field>
+        <field name="context">{'default_payment_type': 'inbound', 'default_partner_type': 'customer', 'default_move_journal_types': ['bank', 'cash']}</field>
+    </record>
+
+    <menuitem id="menu_payment_receipt"
+              name="Phiếu thu"
+              parent="menu_payment_root"
+              action="action_payment_receipt"
+              sequence="1"/>
+
+    <!-- Action Phiếu chi -->
+    <record id="action_payment_payment" model="ir.actions.act_window">
+        <field name="name">Phiếu chi</field>
+        <field name="res_model">account.payment</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[
+            ('payment_type', '=', 'outbound'),
+            ('partner_type', '=', 'supplier'),
+            ('is_internal_transfer', '=', False)
+        ]</field>
+        <field name="context">{'default_payment_type': 'outbound', 'default_partner_type': 'supplier', 'default_move_journal_types': ['bank', 'cash']}</field>
+    </record>
+
+    <menuitem id="menu_payment_payment"
+              name="Phiếu chi"
+              parent="menu_payment_root"
+              action="action_payment_payment"
+              sequence="2"/>
+</odoo>

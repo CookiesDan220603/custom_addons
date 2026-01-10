@@ -1,0 +1,93 @@
+<odoo>
+    <record id="view_move_form_inherit_co_season" model="ir.ui.view">
+        <field name="name">account.move.form.inherit.co.season</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/button[@name='action_register_payment']" position="after">
+                <button name="action_print_invoice"
+                        type="object"
+                        string="In Hóa Đơn"
+                        class="btn-primary"
+                        invisible="move_type not in ['out_invoice', 'out_refund']"/>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="partner_phone"/>
+                <field name="partner_street"/>
+                <field name="license_plate"/>
+                <field name="car_brand"/>
+            </xpath>
+            <xpath expr="//field[@name='narration']" position="attributes">
+                <attribute name="placeholder">Ghi chú</attribute>
+                <attribute name="nolabel">0</attribute>
+                <attribute name="string">Ghi chú</attribute>
+            </xpath>
+            <xpath expr="//field[@name='tax_totals']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='amount_residual']" position="before">
+                    <field name="amount_total_without_discount"
+                           style="font-weight: bold; font-size: 18px;"/>
+                    <field name="discount_total"/>
+            </xpath>
+            <xpath expr="//page[@id='invoice_tab']/field[@name='invoice_line_ids']/tree/field[@name='price_subtotal']" position="after">
+                <field name="price_subtotal_untaxed" optional="show"/>
+            </xpath>
+            <xpath expr="//page[@id='invoice_tab']/field[@name='invoice_line_ids']/tree/field[@name='discount']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+            <xpath expr="//page[@id='invoice_tab']/field[@name='invoice_line_ids']/tree/field[@name='price_subtotal']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+            <xpath expr="//page[@id='invoice_tab']/field[@name='invoice_line_ids']/tree/field[@name='tax_ids']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+<!--            Ẩn nút-->
+            <xpath expr="//button[@name='preview_invoice']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_invoice_sent']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_reverse']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//button[@name='button_draft']" position="attributes">
+                <attribute name="confirm">Bạn có chắc chắn muốn đặt nháp hoá đơn này?</attribute>
+            </xpath>
+
+        </field>
+    </record>
+    <record id="view_move_tree_inherit_co_season" model="ir.ui.view">
+        <field name="name">account.move.tree.inherit.co.season</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='amount_total_signed']" position="after">
+                <field name="co_paid_amount"/>
+            </xpath>
+            <xpath expr="//tree/field[@name='amount_residual_signed']" position="after">
+                <field name="co_payment_state"
+                       string="Trạng thái thanh toán"
+                       widget="badge"
+                       decoration-success="co_payment_state == 'paid'"
+                       decoration-warning="co_payment_state == 'partial'"
+                       decoration-danger="co_payment_state == 'not_paid'"
+                       invisible="payment_state == 'invoicing_legacy' or state != 'posted' or move_type == 'entry'"
+                       optional="show"/>
+            </xpath>
+            <!-- Remove hoàn toàn cột amount_untaxed_signed -->
+            <xpath expr="//tree/field[@name='amount_untaxed_signed']" position="replace"/>
+
+            <!-- Remove hoàn toàn cột activity_ids -->
+            <xpath expr="//tree/field[@name='activity_ids']" position="replace"/>
+
+            <!-- Remove hoàn toàn cột amount_total_in_currency_signed -->
+            <xpath expr="//tree/field[@name='amount_total_in_currency_signed']" position="replace"/>
+            <xpath expr="//tree/field[@name='payment_state']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

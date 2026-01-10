@@ -1,0 +1,17 @@
+<odoo>
+    <record id="view_partner_form_inherit_co_debt" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.co.debt</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet//div[@name='button_box']" position="inside">
+                <button name="action_open_customer_invoices"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-file-text-o">
+                    <field name="co_invoice_count" widget="statinfo" string="Công nợ"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

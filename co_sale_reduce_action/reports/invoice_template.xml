@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="invoice_report_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="co_sale_reduce_action.co_sale_reduce_action_external_layout">
+                        <div class="page" style="margin-top: 0;" >
+                            <style>
+                                body, p, div, span, h1, h2, h3, h4, h5, h6, table {
+                                    font-family: "Times New Roman", Times, serif;
+                                    letter-spacing: 0.5px;
+                                }
+                            </style>
+                            <div class="oe_structure" />
+                            <div class="text-center" style="margin-top: 0;">
+                                <h1>HÓA ĐƠN</h1>
+                            </div>
+                            <div class="row mt32 mb32">
+                                <div class="col-6">
+                                    <div>
+                                        <strong>Khách hàng: </strong>
+                                        <span t-field="o.partner_id.name"/>
+                                    </div>
+                                    <div>
+                                        Địa chỉ: <span t-esc="o.partner_id.street or ''"/>
+                                    </div>
+                                    <div>
+                                        Điện thoại: <span t-esc="o.partner_id.phone or ''"/>
+                                    </div>
+                                    <div>
+                                        Email: <span t-esc="o.partner_id.email or ''"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <t t-if="o.invoice_line_ids">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>Sản phẩm/Dịch vụ</th>
+                                            <th class="text-right">Số lượng</th>
+                                            <th class="text-right">Đơn giá</th>
+                                            <th class="text-right">Thuế</th>
+                                            <th class="text-right">Thành tiền</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-set="line_index" t-value="0"/>
+                                        <tr t-foreach="o.invoice_line_ids.filtered(lambda l: l.product_id)" t-as="line">
+                                            <t t-set="line_index" t-value="line_index + 1"/>
+                                            <td><span t-esc="line_index"/></td>
+                                            <td>
+                                                <span t-field="line.product_id.name"/>
+                                                <div t-if="line.name != line.product_id.name" class="text-muted">
+                                                    <small t-field="line.name"/>
+                                                </div>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-field="line.quantity"/>
+                                                <span t-field="line.product_uom_id.name" groups="uom.group_uom"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-field="line.price_unit"
+                                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-esc="', '.join(map(lambda x: x.name, line.tax_ids))"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-field="line.price_subtotal"
+                                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </t>
+                            <div class="row">
+                                <div class="col-6"></div>
+                                <div class="col-6">
+                                    <table class="table table-sm">
+                                        <tr>
+                                            <td><strong>Tổng tiền hàng:</strong></td>
+                                            <td class="text-right">
+                                                <span t-field="o.amount_untaxed"
+                                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Thuế:</strong></td>
+                                            <td class="text-right">
+                                                <span t-field="o.amount_tax"
+                                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                            </td>
+                                        </tr>
+                                        <tr class="border-black">
+                                            <td><strong>Tổng cộng:</strong></td>
+                                            <td class="text-right">
+                                                <strong>
+                                                    <span t-field="o.amount_total"
+                                                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                                </strong>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row mt32" t-if="o.narration">
+                                <div class="col-12">
+                                    <p><strong>Ghi chú:</strong></p>
+                                    <p t-field="o.narration"/>
+                                </div>
+                            </div>
+                            <div class="mt32">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p><strong>Người mua hàng</strong></p>
+                                        <p>(Ký và ghi rõ họ tên)</p>
+                                        <br/><br/><br/>
+                                    </div>
+                                    <div class="col-6 text-right">
+                                        <p><strong>Người bán hàng</strong></p>
+                                        <p>(Ký và ghi rõ họ tên)</p>
+                                        <br/><br/><br/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="oe_structure"/>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

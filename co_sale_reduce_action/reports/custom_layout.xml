@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="co_sale_reduce_action_external_layout">
+            <t t-call="web.html_container">
+                <t t-if="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id"/>
+                </t>
+                <t t-if="not o or not company">
+                    <t t-set="company" t-value="res_company"/>
+                </t>
+                <style>
+                    * {
+                        font-family: "Times New Roman", Times, serif !important;
+                    }
+                </style>
+
+                <div class="mt2">
+
+                </div>
+                <div class="header" style="font-family:'Times New Roman', Times, serif !important;">
+                    <div class="row">
+                        <div class="col-6">
+                            <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 80px;" alt="Logo"/>
+                        </div>
+                        <div class="col-6 text-end">
+                            <p>
+                                <strong>Số:</strong> <span t-field="o.name"/><br/>
+                                <strong>Ngày:</strong> <span t-field="o.invoice_date"/>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="article o_report_layout_standard">
+                    <t t-raw="0"/>
+                </div>
+                <div class="footer">
+                </div>
+            </t>
+
+        </template>
+    </data>
+</odoo>

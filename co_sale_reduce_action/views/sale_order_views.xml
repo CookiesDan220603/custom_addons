@@ -1,0 +1,114 @@
+<odoo>
+    <data>
+        <!-- Kế thừa form gốc của sale.order -->
+        <record id="view_order_form_inherit_custom" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit.custom</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <!-- Ẩn validity_date -->
+                <xpath expr="//field[@name='validity_date']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+<!--                <xpath expr="//field[@name='sale_order_template_id']" position="attributes" optional="1">-->
+<!--                    <attribute name="invisible">1</attribute>-->
+<!--                </xpath>-->
+                <xpath expr="//field[@name='pricelist_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="attributes">
+                    <attribute name="optional">hide</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='tax_id']" position="attributes">
+                    <attribute name="optional">hide</attribute>
+                </xpath>
+                <xpath expr="//field[@name='note']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_quotation_send']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_preview_sale_order']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='date_order']" position="after">
+                    <field name="co_season"
+                           widget="selection"
+                           class="oe_inline season_select"
+                           options="{'no_create': True, 'no_open': True}"
+                           decoration-bf="co_season == 'vu1'"
+                           decoration-danger="co_season == 'vu2'"
+                           decoration-warning="co_season == 'vu3'"
+                           placeholder="Chọn vụ mùa..."/>
+                    />
+                </xpath>
+                <xpath expr="//button[@id='create_invoice']" position="attributes">
+                    <attribute name="type">object</attribute>
+                    <attribute name="name">action_create_invoices</attribute>
+                    <attribute name="string">Tạo hóa đơn</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_cancel']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//button[@id='send_by_email']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+
+                </xpath>
+<!--                 Chèn nút vào phần header -->
+                <xpath expr="//header/button[@name='action_confirm']" position="after">
+                    <button name="action_cancel_without_picking"
+                            string="Hủy Báo Giá"
+                            type="object"
+                            class="btn-primary"
+                            invisible="state not in ['sale'] or not id or locked"
+                            confirm="Bạn có chắc chắn muốn hủy báo giá này không?"/>/>
+
+                </xpath>
+
+                <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                    <field name="qty_available" optional="show"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='qty_available']" position="after">
+                    <field name="out_of_stock" optional="hide"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_template_id']" position="before">
+                    <field name="product_category_id" string="Phân loại"
+                           options="{'no_create': True, 'no_open': True}"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_template_id']" position="attributes">
+                    <attribute name="domain">[('sale_ok', '=', True), ('categ_id', 'child_of', product_category_id)]</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="sale_order_form_hide_other" model="ir.ui.view">
+            <field name="name">sale.order.form.hide.other</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <!-- Ẩn page Other Info -->
+                <xpath expr="//page[@name='other_information']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//page[@name='customer_signature']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//page[@name='optional_products']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_partner_form_inherit_no_required_email_sale" model="ir.ui.view">
+            <field name="name">res.partner.form.no.required.email.sale</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+              <field name="email" position="attributes">
+                <attribute name="required">0</attribute>
+              </field>
+            </field>
+        </record>
+    </data>
+</odoo>

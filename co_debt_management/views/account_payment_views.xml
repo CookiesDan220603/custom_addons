@@ -1,0 +1,15 @@
+<odoo>
+    <record id="view_account_payment_form_inherit_debt" model="ir.ui.view">
+        <field name="name">account.payment.form.inherit.debt</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+            <!-- chèn thêm thông tin hóa đơn gốc -->
+            <xpath expr="//sheet" position="inside">
+                <group string="Thông tin công nợ">
+                    <field name="deferred_original_move_ids" widget="many2many_tags"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

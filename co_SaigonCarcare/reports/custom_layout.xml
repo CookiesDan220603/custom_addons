@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="co_SaigonCarcare_external_layout">
+            <t t-call="web.html_container">
+                <t t-if="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id"/>
+                </t>
+                <t t-if="not o or not company">
+                    <t t-set="company" t-value="res_company"/>
+                </t>
+                <style>
+                    * {
+                        font-family: "Times New Roman", Times, serif !important;
+                    }
+                </style>
+
+                <div class="mt2">
+
+                </div>
+                <div class="header" style="font-family:'Times New Roman', Times, serif !important;">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="text-center" style="margin-top: 0;">
+                                    <h1 t-esc="company.name" style="font-weight: bold;"/>
+                            </div>
+                            <div>
+                                <strong>Địa chỉ: </strong>
+                                 <span t-esc="company.street or ''"/>
+                            </div>
+                            <div>
+                                <strong>Điện thoại: </strong>
+                                <span t-esc="company.phone or ''"/>
+                            </div>
+                            <div>
+                                <strong>Email: </strong>
+                                <span t-esc="company.email or ''"/>
+                            </div>
+                        </div>
+                        <div class="col-6 justify-content-center align-items-center">
+                            <img class="text-center" t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 130px; padding-left: 10px" alt="Logo"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="article o_report_layout_standard">
+                    <t t-raw="0"/>
+                </div>
+                <div class="footer">
+                </div>
+            </t>
+
+        </template>
+    </data>
+</odoo>

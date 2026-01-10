@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<!--     Inherit tree view account.move-->
+    <record id="view_move_tree_inherit_co_season" model="ir.ui.view">
+        <field name="name">account.move.tree.inherit.co.season</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='amount_total_signed']" position="after">
+                <field name="co_paid_amount"/>
+            </xpath>
+            <xpath expr="//tree/field[@name='amount_residual_signed']" position="after">
+                <field name="co_payment_state"
+                       string="Thanh toán"
+                       widget="badge"
+                       decoration-success="co_payment_state == 'paid'"
+                       decoration-warning="co_payment_state == 'partial'"
+                       decoration-danger="co_payment_state == 'not_paid'"
+                       invisible="payment_state == 'invoicing_legacy' or state != 'posted' or move_type == 'entry'"
+                       optional="show"/>
+<!--                <field name="co_payment_state"-->
+<!--                           string="Payment"-->
+<!--                           widget="badge"-->
+<!--                           decoration-danger="payment_state == 'not_paid'"-->
+<!--                           decoration-warning="payment_state in ('partial')"-->
+<!--                           decoration-success="payment_state in ('paid')"-->
+<!--                           invisible="payment_state == 'invoicing_legacy' or state != 'posted' or move_type == 'entry'"-->
+<!--                           optional="show"/>-->
+            </xpath>
+            <!-- Remove hoàn toàn cột amount_untaxed_signed -->
+            <xpath expr="//tree/field[@name='amount_untaxed_signed']" position="replace"/>
+
+            <!-- Remove hoàn toàn cột activity_ids -->
+            <xpath expr="//tree/field[@name='activity_ids']" position="replace"/>
+
+            <!-- Remove hoàn toàn cột amount_total_in_currency_signed -->
+            <xpath expr="//tree/field[@name='amount_total_in_currency_signed']" position="replace"/>
+            <xpath expr="//tree/field[@name='payment_state']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>
