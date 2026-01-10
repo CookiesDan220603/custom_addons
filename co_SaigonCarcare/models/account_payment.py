@@ -2,6 +2,15 @@ from odoo import models, fields, api
 
 class AccountPayment(models.Model):
     _inherit = 'account.payment'
+    _mail_post_access = 'read'
+    
+    def _message_auto_subscribe_notify(self, partner_ids, template):
+        # Tắt auto subscribe
+        return
+    
+    def message_post(self, **kwargs):
+        # Chặn gửi message
+        return False
 
     @api.model
     def default_get(self, fields_list):
