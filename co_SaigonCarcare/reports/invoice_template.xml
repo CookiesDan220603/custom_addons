@@ -44,6 +44,14 @@
                                         <strong>Hiệu xe: </strong>
                                         <span t-esc="o.car_brand"/>
                                     </div>
+                                    <div>
+                                        <strong>Ngày nhận xe: </strong>
+                                        <span t-esc="o.receiving_date"/>
+                                    </div>
+                                    <div>
+                                        <strong>Ngày giao xe: </strong>
+                                        <span t-esc="o.delivery_date"/>
+                                    </div>
                                 </div>
                             </div>
                             <t t-if="o.invoice_line_ids">
@@ -52,6 +60,7 @@
                                         <tr>
                                             <th>STT</th>
                                             <th>Hạng mục</th>
+                                            <th class="text-right">Đơn vị tính</th>
                                             <th class="text-right">Số lượng</th>
                                             <th class="text-right">Đơn giá</th>
                                             <th class="text-right">Thành tiền</th>
@@ -64,10 +73,10 @@
                                             <td><span t-esc="line_index"/></td>
                                             <td>
                                                 <span t-field="line.product_id.name"/>
-                                                <div t-if="line.name != line.product_id.name" class="text-muted">
-                                                    <small t-field="line.name"/>
-                                                </div>
                                             </td>
+                                            <td class="text-right">
+                                                    <span t-field="line.co_unit"/>
+                                                </td>
                                             <td class="text-right">
                                                 <span t-field="line.quantity"/>
                                                 <span t-field="line.product_uom_id.name" groups="uom.group_uom"/>
@@ -103,15 +112,20 @@
                                         <tr>
                                             <td><strong>ƯU ĐÃI: </strong></td>
                                             <td class="text-right">
-                                                <span t-field="o.discount_total"/>
-                                                <span> %</span>
+                                                <span t-if="o.discount_total" 
+                                                    t-field="o.discount_total"
+                                                    t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                                <span t-if="not o.discount_total"></span>
+                                
                                             </td>
                                         </tr>
                                         <tr>
                                             <td><strong>VAT:</strong></td>
                                             <td class="text-right">
-                                                <span t-field="o.amount_tax"
-                                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                                <span t-if="o.amount_tax" 
+                                                    t-field="o.amount_tax"
+                                                    t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                                <span t-if="not o.amount_tax"></span>
                                             </td>
                                         </tr>
                                         <tr class="border-black">

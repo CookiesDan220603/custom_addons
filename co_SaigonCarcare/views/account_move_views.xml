@@ -16,6 +16,8 @@
                 <field name="partner_street"/>
                 <field name="license_plate"/>
                 <field name="car_brand"/>
+                <field name="receiving_date"/>
+                <field name="delivery_date"/>
             </xpath>
             <xpath expr="//field[@name='narration']" position="attributes">
                 <attribute name="placeholder">Ghi chú</attribute>

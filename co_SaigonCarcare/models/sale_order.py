@@ -43,7 +43,7 @@ class SaleOrder(models.Model):
     )
     discount_total = fields.Float(
         string="Chiết khấu toàn đơn hàng (%)",
-        default=0.0,
+        default='',
         help="Áp dụng mức giảm giá phần trăm cho toàn bộ đơn hàng."
     )
 
@@ -53,6 +53,7 @@ class SaleOrder(models.Model):
         store=True,
         compute='_compute_amount_total_without_discount'
     )
+    
 
     tax_totals_amount = fields.Monetary(string='Tổng thanh toán', currency_field='currency_id',
                                         compute='_compute_tax_totals_amount', store=False)
@@ -104,6 +105,8 @@ class SaleOrder(models.Model):
                 'license_plate': order.license_plate,
                 'car_brand': order.car_brand,
                 'discount_total': order.discount_total,
+                'delivery_date': order.delivery_date,
+                'receiving_date': order.receiving_date,
             })
             for line in invoice.invoice_line_ids:
                     line.discount = invoice.discount_total

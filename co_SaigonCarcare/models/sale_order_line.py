@@ -14,7 +14,6 @@ class SaleOrderLine(models.Model):
     )
     discount_line = fields.Monetary(
         string="Giảm giá (VND)",
-        default=0.0,
         help="Số tiền giảm giá trực tiếp cho dòng này."
     )
     price_subtotal_untaxed = fields.Monetary(
@@ -22,6 +21,17 @@ class SaleOrderLine(models.Model):
         currency_field='currency_id',
         store=True,
         compute='_compute_price_subtotal_untaxed'
+    )
+    co_unit = fields.Selection(
+        selection=[
+            ('xe', 'xe'),
+            ('cap', 'cặp'),
+            ('cai', 'cái'),
+            ('bo', 'bộ'),            
+        ],
+        string="Đơn vị tính",
+        default='xe',
+        store = True
     )
 
     @api.depends('product_uom_qty', 'price_unit')

@@ -17,6 +17,17 @@ class AccountMove(models.Model):
         tracking=True,
         states={'draft': [('readonly', False)]}
     )
+    receiving_date = fields.Date(
+        string="Ngày nhận xe",
+        default=fields.Date.context_today,
+        tracking=True,
+        states={'draft': [('readonly', False)]}
+    )
+    delivery_date = fields.Date(
+        string="Ngày giao xe",
+        tracking=True,
+        states={'draft': [('readonly', False)]}
+    )
     partner_phone = fields.Char(
         string="Số điện thoại",
         related='partner_id.phone',
