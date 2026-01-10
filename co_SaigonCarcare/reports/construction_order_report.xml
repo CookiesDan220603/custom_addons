@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <record id="paperformat_quote_print" model="report.paperformat">
+        <record id="paperformat_construction_order_print" model="report.paperformat">
             <field name="name">Contruction Order print format</field>
             <field name="default" eval="True"/>
             <field name="format">A4</field>
@@ -19,11 +19,11 @@
             <field name="name">Contruction Order Print Report</field>
             <field name="model">sale.order</field>
             <field name="report_type">qweb-pdf</field>
-            <field name="report_name">co_SaigonCarcare.contruction_order_report_template</field>
-            <field name="report_file">co_SaigonCarcare.contruction_order_template</field>
+            <field name="report_name">co_SaigonCarcare.construction_order_report_template</field>
+            <field name="report_file">co_SaigonCarcare.construction_order_template</field>
             <field name="binding_model_id" ref="sale.model_sale_order"/>
             <field name="binding_type">report</field>
-            <field name="paperformat_id" ref="paperformat_quote_print"/>
+            <field name="paperformat_id" ref="paperformat_construction_order_print"/>
             <field name="print_report_name">'LenhThiCong_%s' % (object.name or 'draft').replace('/', '_')</field>
 
         </record>

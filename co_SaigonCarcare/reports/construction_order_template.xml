@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <template id="contruction_order_report_template">
+        <template id="construction_order_report_template">
             <t t-call="web.html_container">
                 <t t-call="co_SaigonCarcare.co_SaigonCarcare_external_layout">
                     <t t-foreach="docs" t-as="o">
