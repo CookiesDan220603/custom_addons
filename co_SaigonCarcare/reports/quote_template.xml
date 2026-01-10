@@ -18,13 +18,14 @@
                             <div class="text-center" style="margin-top: 0;">
                                 <h1 style="font-weight: bold;">BẢNG BÁO GIÁ</h1>
                             </div>
+                            <div class="text-end" style="margin: 0; padding: 0;">
+                                <strong>Đơn hàng: </strong>
+                                <span t-field="o.name" style="font-style: italic;"/>
+                            </div>
 
                             <div class="row mt32 mb32">
                                 <div class="col-6">
-                                    <div>
-                                        <strong>Số hóa đơn: </strong>
-                                        <span t-field="o.name"/>
-                                    </div>
+                                    
                                     <div>
                                         <strong>Khách hàng: </strong>
                                         <span t-field="o.partner_id.name"/>
