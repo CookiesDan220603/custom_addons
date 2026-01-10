@@ -28,5 +28,11 @@ class AccountPayment(models.Model):
         # Tắt tracking để không gửi email
         return False
     def action_post(self):
-    # Tắt gửi email
-        return super(AccountPayment, self.with_context(mail_create_nosubscribe=True, mail_create_nolog=True, mail_notrack=True)).action_post()
+        # Lấy email mặc định nếu user không có email
+        ctx = dict(self.env.context)
+        if not self.env.user.email:
+            ctx['mail_create_nosubscribe'] = True
+            ctx['mail_notrack'] = True
+            # Hoặc set email mặc định
+            self = self.with_context(**ctx)
+        return super(AccountPayment, self).action_post()
