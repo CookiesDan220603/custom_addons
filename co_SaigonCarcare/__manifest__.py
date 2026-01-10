@@ -23,6 +23,8 @@
         'reports/quote_report.xml',
         'reports/quote_template.xml',
         'reports/custom_layout.xml',
+        'reports/contruction_order_report.xml',
+        'reports/contruction_order_template.xml',
         'views/sale_order_views.xml',
         'views/product_template_views.xml',
         'views/account_move_views.xml',
