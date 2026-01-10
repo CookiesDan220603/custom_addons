@@ -54,11 +54,11 @@
                                     </div>
                                     <div>
                                         <strong>Ngày nhận xe: </strong>
-                                        <span t-esc="o.receiving_date"/>
+                                        <span t-esc="o.receiving_date" t-options="{'widget': 'date', 'format': 'dd/MM/yyyy'}"/>
                                     </div>
                                     <div>
                                         <strong>Ngày giao xe: </strong>
-                                        <span t-esc="o.delivery_date"/>
+                                        <span t-esc="o.delivery_date" t-options="{'widget': 'date', 'format': 'dd/MM/yyyy'}"/>
                                     </div>
                                 </div>
                             </div>

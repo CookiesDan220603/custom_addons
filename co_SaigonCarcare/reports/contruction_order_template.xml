@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <template id="quote_report_template">
+        <template id="contruction_order_report_template">
             <t t-call="web.html_container">
                 <t t-call="co_SaigonCarcare.co_SaigonCarcare_external_layout">
                     <t t-foreach="docs" t-as="o">
@@ -23,7 +23,7 @@
                             <div class="oe_structure"></div>
 
                             <div class="text-center" style="margin-top: 0;">
-                                <h1 style="font-weight: bold;">BẢNG BÁO GIÁ</h1>
+                                <h1 style="font-weight: bold;">LỆNH THI CÔNG</h1>
                             </div>
                             <div class="text-end" style="margin: 0; padding: 0;">
                                 <strong>Đơn hàng: </strong>
@@ -66,7 +66,7 @@
                                     </div>
                                     <div>
                                         <strong>Ngày giao xe: </strong>
-                                        <span t-esc="o.delivery_date" t-options="{'widget': 'date', 'format': 'dd/MM/yyyy'}"/>
+                                        <span t-esc="o.delivery_date" t-options="{'widget': 'date', 'format': 'dd/MM/yyyy'}"s/>
                                     </div>
                                 </div>
                             </div>
@@ -79,8 +79,6 @@
                                             <th>Hạng mục</th>
                                             <th>Đơn vị tính</th>
                                             <th class="text-right">Số lượng</th>
-                                            <th class="text-right">Đơn giá</th>
-                                            <th class="text-right">Thành tiền</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -99,14 +97,7 @@
                                                     <span t-field="line.product_uom_qty"/>
                                                     <span t-field="line.product_uom_id.name" groups="uom.group_uom"/>
                                                 </td>
-                                                <td class="text-right">
-                                                    <span t-field="line.price_unit"
-                                                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-                                                </td>
-                                                <td class="text-right">
-                                                    <span t-field="line.price_subtotal_untaxed"
-                                                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-                                                </td>
+                                            
                                             </tr>
                                         </t>
                                     </tbody>
@@ -117,49 +108,6 @@
                                 <strong>Ghi chú:</strong>
                                 <span t-esc="o.note"/>
                                 <br/>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-6"></div>
-                                <div class="col-6">
-                                    <table class="table table-sm table-2px-border">
-                                        <tr>
-                                            <td><strong>TỔNG CỘNG:</strong></td>
-                                            <td class="text-right">
-                                                <span t-field="o.amount_total_without_discount"
-                                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>ƯU ĐÃI: </strong></td>
-                                            <td class="text-right">
-                                                <span t-if="o.discount_total" 
-                                                    t-field="o.discount_total"
-                                                    t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-                                                <span t-if="not o.discount_total"></span>
-                                
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>VAT:</strong></td>
-                                            <td class="text-right">
-                                                <span t-if="o.amount_tax" 
-                                                    t-field="o.amount_tax"
-                                                    t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-                                                <span t-if="not o.amount_tax"></span>
-                                            </td>
-                                        </tr>
-                                        <tr class="border-black">
-                                            <td><strong>THÀNH TIỀN:</strong></td>
-                                            <td class="text-right">
-                                                <strong>
-                                                    <span t-field="o.amount_total"
-                                                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-                                                </strong>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
                             </div>
 
                             <div class="text-end">
@@ -174,25 +122,6 @@
                                 </p>
                             </div>
 
-                            <div class="mt32">
-                                <div class="row text-center">
-                                    <div class="col-4">
-                                        <p><strong>Khách hàng đồng ý</strong></p>
-                                        <p>(Ký và ghi rõ họ tên)</p>
-                                        <br/><br/><br/>
-                                    </div>
-                                    <div class="col-4">
-                                        <p><strong>Cố vấn dịch vụ</strong></p>
-                                        <p>(Ký và ghi rõ họ tên)</p>
-                                        <br/><br/><br/>
-                                    </div>
-                                    <div class="col-4">
-                                        <p><strong>Kế toán</strong></p>
-                                        <p>(Ký và ghi rõ họ tên)</p>
-                                        <br/><br/><br/>
-                                    </div>
-                                </div>
-                            </div>
 
                             <div class="oe_structure"></div>
 

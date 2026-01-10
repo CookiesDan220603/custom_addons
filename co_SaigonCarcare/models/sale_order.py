@@ -192,6 +192,10 @@ class SaleOrder(models.Model):
         self.ensure_one()
         # Gọi report action để in PDF
         return self.env.ref('co_SaigonCarcare.quotes_report_action').report_action(self)
+    def action_print_construction_order(self):
+        self.ensure_one()
+        # Gọi report action để in PDF
+        return self.env.ref('co_SaigonCarcare.construction_report_action').report_action(self)
 
     @api.onchange('partner_id')
     def _onchange_partner_id(self):
