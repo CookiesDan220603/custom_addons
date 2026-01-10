@@ -15,7 +15,7 @@
         - Filter hóa đơn theo khách - vụ - năm - chưa thanh toán - đã thanh toán
         - In phiếu thanh toán đầy đủ
     """,
-    'depends': ['sale', 'sale_management','account','contacts','stock'],
+    'depends': ['sale', 'sale_management','account','stock'],
     'category': 'Cookies Modules',
     'data': [
         'reports/invoice_report.xml',
