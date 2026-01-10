@@ -63,7 +63,7 @@
                                 </div>
                             </div>
                             <t t-if="o.invoice_line_ids">
-                                <table class="table table-sm">
+                                <table class="table table-sm table-2px-border">
                                     <thead>
                                         <tr>
                                             <th>STT</th>
@@ -109,7 +109,7 @@
                             <div class="row">
                                 <div class="col-6"/>
                                 <div class="col-6">
-                                    <table class="table table-sm">
+                                    <table class="table table-sm table-2px-border">
                                         <tr>
                                             <td><strong>TỔNG CỘNG:</strong></td>
                                             <td class="text-right">
