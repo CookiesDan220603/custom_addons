@@ -14,3 +14,10 @@ class AccountPayment(models.Model):
                 defaults['journal_id'] = cash_journal.id
 
         return defaults
+    # Trong model account.payment hoặc sale.order
+    def _track_subtype(self, init_values):
+        # Tắt tracking để không gửi email
+        return False
+    def action_post(self):
+    # Tắt gửi email
+        return super(AccountPayment, self.with_context(mail_create_nosubscribe=True, mail_create_nolog=True, mail_notrack=True)).action_post()
