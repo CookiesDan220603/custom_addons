@@ -32,9 +32,14 @@
                                 <strong>Điện thoại: </strong>
                                 <span t-esc="company.phone or ''"/>
                             </div>
-                            <div>
+                            
+                            <div t-if="company.email">
                                 <strong>Email: </strong>
                                 <span t-esc="company.email or ''"/>
+                            </div>
+                            <div t-if="company.website">
+                                <strong>Website: </strong>
+                                <span t-esc="company.website or ''"/>
                             </div>
                         </div>
                         <div class="col-6 justify-content-center align-items-center">

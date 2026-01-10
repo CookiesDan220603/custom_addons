@@ -11,6 +11,14 @@
                                     font-family: "Times New Roman", Times, serif;
                                     letter-spacing: 0.5px;
                                 }
+                                .table-2px-border {
+                                    border: 2px solid black !important;
+                                    border-collapse: collapse;
+                                }
+                                .table-2px-border th,
+                                .table-2px-border td {
+                                    border: 2px solid black !important;
+                                }
                             </style>
                             <div class="oe_structure" />
                             <div class="text-center" style="margin-top: 0;">

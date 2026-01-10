@@ -10,6 +10,13 @@
                                 body, p, div, span, h1, h2, h3, h4, h5, h6, table {
                                     font-family: "Times New Roman", Times, serif;
                                     letter-spacing: 0.5px;
+                                }.table-2px-border {
+                                    border: 2px solid black !important;
+                                    border-collapse: collapse;
+                                }
+                                .table-2px-border th,
+                                .table-2px-border td {
+                                    border: 2px solid black !important;
                                 }
                             </style>
 
