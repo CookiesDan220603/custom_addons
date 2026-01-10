@@ -89,7 +89,7 @@
                     <field name="co_unit" string="Đơn vị tính"/>
                 </xpath>
                 <xpath expr="//field[@name='order_line']/tree/field[@name='product_template_id']" position="attributes">
-                    <attribute name="domain">[('sale_ok', '=', True), ('categ_id', 'child_of', product_category_id)]</attribute>
+                    <attribute name="domain">[('sale_ok', '=', True)]</attribute>
                 </xpath>
                 <xpath expr="//group[@name='note_group']" position="replace">
                     <group name="note_group" col="6" class="mt-2 mt-md-0">
