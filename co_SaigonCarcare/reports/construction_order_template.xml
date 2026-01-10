@@ -66,7 +66,7 @@
                                     </div>
                                     <div>
                                         <strong>Ngày giao xe: </strong>
-                                        <span t-esc="o.delivery_date" t-options="{'widget': 'date', 'format': 'dd/MM/yyyy'}"s/>
+                                        <span t-esc="o.delivery_date" t-options="{'widget': 'date', 'format': 'dd/MM/yyyy'}"/>
                                     </div>
                                 </div>
                             </div>
