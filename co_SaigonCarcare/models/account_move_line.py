@@ -9,6 +9,17 @@ class AccountMoveLine(models.Model):
         store=True,
         compute='_compute_price_subtotal_untaxed'
     )
+    co_unit = fields.Selection(
+        selection=[
+            ('xe', 'xe'),
+            ('cap', 'cặp'),
+            ('cai', 'cái'),
+            ('bo', 'bộ'),            
+        ],
+        string="Đơn vị tính",
+        default='xe',
+        store = True
+    )
 
     @api.depends('quantity', 'price_unit')
     def _compute_price_subtotal_untaxed(self):

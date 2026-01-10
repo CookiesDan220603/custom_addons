@@ -22,6 +22,10 @@
                             <div class="row mt32 mb32">
                                 <div class="col-6">
                                     <div>
+                                        <strong>Số hóa đơn: </strong>
+                                        <span t-field="o.name"/>
+                                    </div>
+                                    <div>
                                         <strong>Khách hàng: </strong>
                                         <span t-field="o.partner_id.name"/>
                                     </div>

@@ -8,10 +8,6 @@ class SaleOrderLine(models.Model):
     out_of_stock = fields.Boolean(string='Out of Stock',
                                   compute='_compute_out_of_stock',
                                   store=True)
-    product_category_id = fields.Many2one(
-        'product.category',
-        string='Phân loại sản phẩm',
-    )
     discount_line = fields.Monetary(
         string="Giảm giá (VND)",
         help="Số tiền giảm giá trực tiếp cho dòng này."
@@ -105,22 +101,10 @@ class SaleOrderLine(models.Model):
                     l.out_of_stock = False
 
     # ========= ONCHANGE =========
-    @api.onchange('product_category_id')
-    def _onchange_product_category_id(self):
-        if self.product_category_id:
-            # Lấy cả category con
-            category_ids = self.env['product.category'].search([
-                ('id', 'child_of', self.product_category_id.id)
-            ]).ids
-
-            domain = [
-                ('sale_ok', '=', True),
-                ('categ_id', 'in', category_ids)
-            ]
-        else:
-            domain = [('sale_ok', '=', True)]
-
-        return {'domain': {'product_template_id': domain}}
+    def _prepare_invoice_line(self, **optional_values):
+        res = super(SaleOrderLine, self)._prepare_invoice_line(**optional_values)
+        res['co_unit'] = self.co_unit
+        return res
 
 
 

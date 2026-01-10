@@ -88,10 +88,6 @@
                 <xpath expr="//field[@name='order_line']/tree/field[@name='product_template_id']" position="after">
                     <field name="co_unit" string="Đơn vị tính"/>
                 </xpath>
-                <xpath expr="//field[@name='order_line']/tree/field[@name='product_template_id']" position="before">
-                    <field name="product_category_id" string="Phân loại"
-                           options="{'no_create': True, 'no_open': True}"/>
-                </xpath>
                 <xpath expr="//field[@name='order_line']/tree/field[@name='product_template_id']" position="attributes">
                     <attribute name="domain">[('sale_ok', '=', True), ('categ_id', 'child_of', product_category_id)]</attribute>
                 </xpath>
