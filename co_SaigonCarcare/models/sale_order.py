@@ -170,59 +170,48 @@ class SaleOrder(models.Model):
             # Hủy + xóa invoice liên quan
             # Hủy + xóa invoice và payment liên quan
             invoices = self.env["account.move"].search([("invoice_origin", "=", order.name)])
+        
+            _logger.info(f"=== Canceling order {order.name} ===")
+            _logger.info(f"Found invoices to delete: {invoices.mapped('name')}")
+            
             for inv in invoices:
-                # Tìm payment CỤ THỂ cho invoice này
-                # Cách 1: Qua reconciled_invoice_ids (chính xác nhất)
-                payments = self.env["account.payment"].search([
-                    ('reconciled_invoice_ids', '=', inv.id)
+                # CHỈ tìm payment mà invoice này là DUY NHẤT invoice được reconcile
+                all_payments = self.env["account.payment"].search([
+                    ('reconciled_invoice_ids', 'in', inv.id)
                 ])
                 
-                # Cách 2: Nếu không tìm thấy, tìm qua ref
-                if not payments:
-                    payments = self.env["account.payment"].search([
-                        ('ref', '=', inv.name)
-                    ])
+                # Lọc chỉ lấy payment CHỈ reconcile với invoice này
+                payments_to_delete = self.env["account.payment"]
+                for payment in all_payments:
+                    # Kiểm tra payment này chỉ reconcile với invoice hiện tại
+                    if len(payment.reconciled_invoice_ids) == 1 and payment.reconciled_invoice_ids.id == inv.id:
+                        payments_to_delete |= payment
+                        _logger.info(f"Will delete payment {payment.name} - only reconciled to {inv.name}")
+                    else:
+                        _logger.warning(f"SKIP payment {payment.name} - reconciled to multiple invoices: {payment.reconciled_invoice_ids.mapped('name')}")
                 
-                # Cách 3: Tìm qua reconciliation của invoice lines (cẩn thận hơn)
-                if not payments:
-                    # Lấy các account.move.line của invoice
-                    invoice_aml_ids = inv.line_ids.filtered(lambda l: l.account_id.account_type in ['asset_receivable', 'liability_payable']).ids
-                    
-                    # Tìm payment có reconcile với các line này
-                    if invoice_aml_ids:
-                        payment_moves = self.env['account.move'].search([
-                            ('payment_id', '!=', False),
-                            ('line_ids.matched_debit_ids.debit_move_id', 'in', invoice_aml_ids)
-                        ])
-                        if not payment_moves:
-                            payment_moves = self.env['account.move'].search([
-                                ('payment_id', '!=', False),
-                                ('line_ids.matched_credit_ids.credit_move_id', 'in', invoice_aml_ids)
-                            ])
-                        payments = payment_moves.mapped('payment_id')
-                
-                # Xóa các payment tìm được
-                for payment in payments:
+                # Xóa các payment an toàn
+                for payment in payments_to_delete:
                     try:
+                        _logger.info(f"Deleting payment {payment.name}")
                         if payment.state == 'posted':
                             payment.action_draft()
                         payment.unlink()
                     except Exception as e:
-                        import logging
-                        _logger = logging.getLogger(__name__)
-                        _logger.warning(f"Cannot delete payment {payment.name}: {str(e)}")
+                        _logger.error(f"Cannot delete payment {payment.name}: {str(e)}")
 
                 # Bỏ reconcile trước khi xóa invoice
                 try:
                     inv.line_ids.remove_move_reconcile()
-                except:
-                    pass
+                except Exception as e:
+                    _logger.warning(f"Cannot remove reconcile for {inv.name}: {str(e)}")
                 
                 # Đặt invoice về draft nếu chưa ở draft
                 if inv.state != 'draft':
                     inv.button_draft()
 
                 # Xóa invoice
+                _logger.info(f"Deleting invoice {inv.name}")
                 inv.unlink()
 
 
