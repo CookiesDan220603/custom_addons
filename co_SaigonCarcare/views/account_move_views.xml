@@ -12,16 +12,15 @@
                         invisible="move_type not in ['out_invoice', 'out_refund']"/>
             </xpath>
             <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="invoice_origin"/>
                 <field name="partner_phone"/>
                 <field name="partner_street"/>
                 <field name="license_plate"/>
                 <field name="car_brand"/>
+                <field name="receiving_date"/>
+                <field name="delivery_date"/>
             </xpath>
-            <xpath expr="//field[@name='invoice_date_due']" position="after">
-                    
-                    <field name="receiving_date"/>
-                    <field name="delivery_date"/>
-                </xpath>
+            
             <xpath expr="//field[@name='narration']" position="attributes">
                 <attribute name="placeholder">Ghi chú</attribute>
                 <attribute name="nolabel">0</attribute>
