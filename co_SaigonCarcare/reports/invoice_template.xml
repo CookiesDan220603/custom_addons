@@ -25,12 +25,20 @@
                                 <h1 style="font-weight: bold;">PHIẾU THU</h1>
                             </div>
                             <div class="text-end" style="margin: 0; padding: 0;">
-                                <strong>Đơn hàng: </strong>
-                                <span t-field="o.invoice_origin" style="font-style: italic;"/>
-                            </div>
-                            <div class="text-end" style="margin: 0; padding: 0;">
-                                <strong>Phiếu thu số: </strong>
-                                <span t-field="o.payment_reference" style="font-style: italic;"/>
+                                <table style="margin-left: auto; border: none;">
+                                    <tr style="border: none;">
+                                        <td style="border: none; padding: 2px 5px;"><strong>Đơn hàng:</strong></td>
+                                        <td style="border: none; padding: 2px 5px;">
+                                            <span t-field="o.invoice_origin" style="font-style: italic;"/>
+                                        </td>
+                                    </tr>
+                                    <tr style="border: none;">
+                                        <td style="border: none; padding: 2px 5px;"><strong>Phiếu thu số:</strong></td>
+                                        <td style="border: none; padding: 2px 5px;">
+                                            <span t-field="o.payment_reference" style="font-style: italic;"/>
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                             <div class="row mt32 mb32" style="margin-top : 0px;">
                                 <div class="col-6">
