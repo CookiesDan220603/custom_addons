@@ -9,7 +9,7 @@
                         type="object"
                         string="In Hóa Đơn"
                         class="btn-primary"
-                        invisible="move_type not in ['out_invoice', 'out_refund']"/>
+                        invisible="state not in ['posted']"/>
             </xpath>
             <xpath expr="//field[@name='partner_id']" position="after">
                 <field name="partner_phone"/>
