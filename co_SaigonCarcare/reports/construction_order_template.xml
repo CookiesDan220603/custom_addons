@@ -83,11 +83,11 @@
                                         <t t-foreach="o.order_line" t-as="line">
                                             <t t-set="line_index" t-value="line_index + 1"/>
                                             <tr>
-                                                <td><span t-esc="line_index"/></td>
+                                                <td class="text-center"><span t-esc="line_index"/></td>
                                                 <td>
                                                     <span t-field="line.product_template_id.name"/>
                                                 </td>
-                                                <td class="text-right">
+                                                <td class="text-center">
                                                     <span t-field="line.co_unit"/>
                                                 </td>
                                                 <td class="text-right">
@@ -121,12 +121,12 @@
                             <div class="mt32">
                                 <div class="row text-center">
     
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <p><strong>Cố vấn dịch vụ</strong></p>
                                         <p>(Ký và ghi rõ họ tên)</p>
                                         <br/><br/><br/>
                                     </div>
-                                    <div class="col-4 text-right">
+                                    <div class="col-6 text-right">
                                         <p><strong>Kỹ thuật viên</strong></p>
                                         <p>(Ký và ghi rõ họ tên)</p>
                                         <br/><br/><br/>

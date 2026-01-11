@@ -88,11 +88,11 @@
                                         <t t-foreach="o.order_line" t-as="line">
                                             <t t-set="line_index" t-value="line_index + 1"/>
                                             <tr>
-                                                <td><span t-esc="line_index"/></td>
+                                                <td class="text-center"><span t-esc="line_index"/></td>
                                                 <td>
                                                     <span t-field="line.product_template_id.name"/>
                                                 </td>
-                                                <td class="text-right">
+                                                <td class="text-center">
                                                     <span t-field="line.co_unit"/>
                                                 </td>
                                                 <td class="text-right">

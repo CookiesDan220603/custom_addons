@@ -78,11 +78,11 @@
                                         <t t-set="line_index" t-value="0"/>
                                         <tr t-foreach="o.invoice_line_ids.filtered(lambda l: l.product_id)" t-as="line">
                                             <t t-set="line_index" t-value="line_index + 1"/>
-                                            <td><span t-esc="line_index"/></td>
+                                            <td class="text-center"><span t-esc="line_index"/></td>
                                             <td>
                                                 <span t-field="line.product_id.name"/>
                                             </td>
-                                            <td class="text-right">
+                                            <td class="text-center">
                                                     <span t-field="line.co_unit"/>
                                                 </td>
                                             <td class="text-right">
