@@ -47,6 +47,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="footer" style="font-family:'Times New Roman', Times, serif !important;">
+                    <div class="text-end" style="margin-top: 20px;">
+                        <p style="font-style: italic; font-size: 0.9em;">
+                            <strong>Thời gian in: </strong>
+                            <t t-esc="datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')"/>
+                        </p>
+                    </div>
+                </div>
+
 
                 <div class="article o_report_layout_standard">
                     <t t-raw="0"/>

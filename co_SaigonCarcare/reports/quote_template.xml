@@ -193,12 +193,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="text-end" style="margin-top: 20px;">
-                                <p style="font-style: italic; font-size: 0.9em;">
-                                    <strong>Thời gian in: </strong>
-                                    <t t-esc="datetime.datetime.now().strftime('%d/%m/%Y %H:%M:%S')"/>
-                                </p>
-                            </div>
+                            
 
                             <div class="oe_structure"></div>
 
