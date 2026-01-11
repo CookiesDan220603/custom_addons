@@ -26,16 +26,16 @@
                             </div>
                             <div class="text-end" style="margin: 0; padding: 0;">
                                 <table style="margin-left: auto; border: none;">
-                                    <tr class="text_right" style="border: none;">
-                                        <td class="text_right"  style="border: none; padding: 2px 5px;"><strong>Đơn hàng:</strong></td>
-                                        <td class="text_right" style="border: none; padding: 2px 5px;">
-                                            <span class="text_right" t-field="o.invoice_origin" style="font-style: italic;"/>
+                                    <tr class="text_left" style="border: none;">
+                                        <td class="text_left"  style="border: none; padding: 2px 5px;"><strong>Đơn hàng:</strong></td>
+                                        <td class="text_left" style="border: none; padding: 2px 5px;">
+                                            <span class="text_left" t-field="o.invoice_origin" style="font-style: italic;"/>
                                         </td>
                                     </tr>
-                                    <tr class="text_right" style="border: none;">
-                                        <td class="text_right"  style="border: none; padding: 2px 5px;"><strong>Phiếu thu số:</strong></td>
-                                        <td class="text_right" style="border: none; padding: 2px 5px;">
-                                            <span class="text_right" t-field="o.payment_reference" style="font-style: italic;"/>
+                                    <tr class="text_left" style="border: none;">
+                                        <td class="text_left"  style="border: none; padding: 2px 5px;"><strong>Phiếu thu số:</strong></td>
+                                        <td class="text_left" style="border: none; padding: 2px 5px;">
+                                            <span class="text_left" t-field="o.payment_reference" style="font-style: italic;"/>
                                         </td>
                                     </tr>
                                 </table>
