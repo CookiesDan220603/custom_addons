@@ -112,14 +112,14 @@
                                     <table class="table table-sm table-2px-border">
                                         <tr>
                                             <td><strong>TỔNG CỘNG:</strong></td>
-                                            <td class="text-right">
+                                            <td class="text-end">
                                                 <span t-field="o.amount_total_without_discount"
                                                       t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td><strong>ƯU ĐÃI: </strong></td>
-                                            <td class="text-right">
+                                            <td class="text-end">
                                                 <span t-if="o.discount_total" 
                                                     t-field="o.discount_total"
                                                     t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
@@ -129,7 +129,7 @@
                                         </tr>
                                         <tr>
                                             <td><strong>VAT:</strong></td>
-                                            <td class="text-right">
+                                            <td class="text-end">
                                                 <span t-if="o.amount_tax" 
                                                     t-field="o.amount_tax"
                                                     t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
@@ -138,7 +138,7 @@
                                         </tr>
                                         <tr class="border-black">
                                             <td><strong>THÀNH TIỀN:</strong></td>
-                                            <td class="text-right">
+                                            <td class="text-end">
                                                 <strong>
                                                     <span t-field="o.amount_total"
                                                           t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
