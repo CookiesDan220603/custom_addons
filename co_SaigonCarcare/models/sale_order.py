@@ -171,34 +171,52 @@ class SaleOrder(models.Model):
             # Hủy + xóa invoice và payment liên quan
             invoices = self.env["account.move"].search([("invoice_origin", "=", order.name)])
             for inv in invoices:
-                # Tìm payment qua nhiều cách
+                # Tìm payment CỤ THỂ cho invoice này
+                # Cách 1: Qua reconciled_invoice_ids (chính xác nhất)
                 payments = self.env["account.payment"].search([
-                    '|', '|', '|',
-                    ('reconciled_invoice_ids', 'in', inv.id),
-                    ('reconciled_bill_ids', 'in', inv.id),
-                    ('move_id.line_ids.matched_debit_ids.debit_move_id.move_id', '=', inv.id),
-                    ('move_id.line_ids.matched_credit_ids.credit_move_id.move_id', '=', inv.id)
+                    ('reconciled_invoice_ids', '=', inv.id)
                 ])
                 
-                # Hoặc tìm qua reverse relationship từ invoice
+                # Cách 2: Nếu không tìm thấy, tìm qua ref
                 if not payments:
-                    # Lấy payment từ account.partial.reconcile
                     payments = self.env["account.payment"].search([
-                        ('move_id.line_ids', 'in', inv.line_ids.ids)
+                        ('ref', '=', inv.name)
                     ])
+                
+                # Cách 3: Tìm qua reconciliation của invoice lines (cẩn thận hơn)
+                if not payments:
+                    # Lấy các account.move.line của invoice
+                    invoice_aml_ids = inv.line_ids.filtered(lambda l: l.account_id.account_type in ['asset_receivable', 'liability_payable']).ids
+                    
+                    # Tìm payment có reconcile với các line này
+                    if invoice_aml_ids:
+                        payment_moves = self.env['account.move'].search([
+                            ('payment_id', '!=', False),
+                            ('line_ids.matched_debit_ids.debit_move_id', 'in', invoice_aml_ids)
+                        ])
+                        if not payment_moves:
+                            payment_moves = self.env['account.move'].search([
+                                ('payment_id', '!=', False),
+                                ('line_ids.matched_credit_ids.credit_move_id', 'in', invoice_aml_ids)
+                            ])
+                        payments = payment_moves.mapped('payment_id')
                 
                 # Xóa các payment tìm được
                 for payment in payments:
                     try:
                         if payment.state == 'posted':
-                            payment.action_draft()  # đặt payment về draft
-                        payment.unlink()  # xóa payment
+                            payment.action_draft()
+                        payment.unlink()
                     except Exception as e:
-                        # Log lỗi nếu không xóa được
+                        import logging
+                        _logger = logging.getLogger(__name__)
                         _logger.warning(f"Cannot delete payment {payment.name}: {str(e)}")
 
                 # Bỏ reconcile trước khi xóa invoice
-                inv.line_ids.remove_move_reconcile()
+                try:
+                    inv.line_ids.remove_move_reconcile()
+                except:
+                    pass
                 
                 # Đặt invoice về draft nếu chưa ở draft
                 if inv.state != 'draft':
@@ -206,6 +224,7 @@ class SaleOrder(models.Model):
 
                 # Xóa invoice
                 inv.unlink()
+
 
             # Hủy sale.order
             order.state = "cancel"
