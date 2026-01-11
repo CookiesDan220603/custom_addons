@@ -8,25 +8,25 @@ class AccountMove(models.Model):
         string="Biển số xe",
         readonly=True,
         tracking=True,
-        states={'draft': [('readonly', False)]}
+        
     )
 
     car_brand = fields.Char(
         string="Hiệu xe",
         readonly=True,
         tracking=True,
-        states={'draft': [('readonly', False)]}
+        
     )
     receiving_date = fields.Date(
         string="Ngày nhận xe",
         default=fields.Date.context_today,
         tracking=True,
-        states={'draft': [('readonly', False)]}
+        
     )
     delivery_date = fields.Date(
         string="Ngày giao xe",
         tracking=True,
-        states={'draft': [('readonly', False)]}
+        
     )
     partner_phone = fields.Char(
         string="Số điện thoại",
