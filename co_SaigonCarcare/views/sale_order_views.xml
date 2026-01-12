@@ -160,7 +160,7 @@
                             type="object"
                             string="In lệnh thi công"
                             class="btn-primary"
-                            invisible="state in ['draft', 'cancel]"/>
+                            invisible="state in ['draft', 'cancel']"/>
                 </xpath>
         </field>
     </record>
