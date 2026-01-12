@@ -11,6 +11,15 @@
                                     font-family: "Times New Roman", Times, serif;
                                     letter-spacing: 0.5px;
                                 }
+                                .page {
+                                    font-size: 14px;
+                                }
+                                .table {
+                                    font-size: 14px;
+                                }
+                                .page h1 {
+                                    font-size: 24px;
+                                }
                                 .table-2px-border {
                                     border: 2px solid black !important;
                                     border-collapse: collapse;
