@@ -155,7 +155,7 @@
                             type="object"
                             string="In báo giá"
                             class="btn-primary"
-                            invisible="state in ['cancel]"/>
+                            invisible="state in ['cancel']"/>
                     <button name="action_print_construction_order"
                             type="object"
                             string="In lệnh thi công"
