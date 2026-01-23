@@ -3,7 +3,12 @@ from odoo import models, fields, api, _
 
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
-
+    detailed_type = fields.Selection(
+        default='service'
+    )
+    sale_ok = fields.boolean(
+        default=True
+    )
     @api.model
     def default_get(self, fields_list):
         defaults = super().default_get(fields_list)
