@@ -6,7 +6,7 @@ class ProductTemplate(models.Model):
     detailed_type = fields.Selection(
         default='service'
     )
-    sale_ok = fields.boolean(
+    sale_ok = fields.Boolean(
         default=True
     )
     @api.model
