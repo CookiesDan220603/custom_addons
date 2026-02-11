@@ -2,7 +2,6 @@ from odoo import models, fields, api, _
 import logging
 from odoo.tools.misc import formatLang
 
-
 _logger = logging.getLogger(__name__)
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
@@ -243,12 +242,15 @@ class SaleOrder(models.Model):
                 if 'partner_street' in vals:
                     rec.partner_id.street = vals['partner_street']
         return res
-
-    def create(self, vals):
-        rec = super().create(vals)
-        if rec.partner_id:
-            if vals.get('partner_phone'):
-                rec.partner_id.phone = vals['partner_phone']
-            if vals.get('partner_street'):
-                rec.partner_id.street = vals['partner_street']
-        return rec
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        
+        for rec, vals in zip(records, vals_list):
+            if rec.partner_id:
+                if vals.get('partner_phone'):
+                    rec.partner_id.phone = vals['partner_phone']
+                if vals.get('partner_street'):
+                    rec.partner_id.street = vals['partner_street']
+        
+        return records
