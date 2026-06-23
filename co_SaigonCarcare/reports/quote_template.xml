@@ -154,8 +154,7 @@
                                             <td><strong>VAT:</strong></td>
                                             <td class="text-end">
                                                 <span t-if="o.amount_tax" 
-                                                    t-field="o.amount_tax"
-                                                    t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                                    t-field="o.amount_tax"/>%
                                                 <span t-if="not o.amount_tax"></span>
                                             </td>
                                         </tr>

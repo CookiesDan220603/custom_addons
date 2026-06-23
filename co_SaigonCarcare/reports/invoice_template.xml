@@ -142,8 +142,7 @@
                                             <td><strong>ƯU ĐÃI: </strong></td>
                                             <td class="text-end">
                                                 <span t-if="o.discount_total" 
-                                                    t-field="o.discount_total"
-                                                    t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                                    t-field="o.discount_total"/>%
                                                 <span t-if="not o.discount_total"></span>
                                 
                                             </td>
